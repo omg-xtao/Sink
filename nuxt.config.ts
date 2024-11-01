@@ -15,9 +15,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': {
-      prerender: true,
-    },
+    // '/': {
+    //   prerender: true,
+    // },
     '/dashboard/**': {
       ssr: false,
     },
@@ -46,6 +46,15 @@ export default defineNuxtConfig({
     experimental: {
       // Enable Server API documentation within NuxtHub
       openAPI: true,
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/_index/*',
+          ],
+        },
+      },
     },
   },
 
