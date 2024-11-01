@@ -1,0 +1,22 @@
+name: Update Homepage
+
+on:
+  workflow_dispatch: ~
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          fetch-depth: 0
+      - name: Deploy
+        run: |
+          cd public
+          wget -O deploy.sh https://github.com/omg-xtao/homepage/raw/refs/heads/main/deploy.sh
+          bash deploy.sh
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: ":bento: Update Homepage"
