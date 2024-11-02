@@ -3,6 +3,7 @@ import { parsePath, withQuery } from 'ufo'
 import type { LinkSchema } from '@/schemas/link'
 
 export default eventHandler(async (event) => {
+  const userAgent = event.headers.get('User-Agent')
   const { pathname: slug } = parsePath(event.path.replace(/^\/|\/$/g, '')) // remove leading and trailing slashes
   const { slugRegex, reserveSlug } = useAppConfig(event)
   const { homeURL, linkCacheTtl, redirectWithQuery } = useRuntimeConfig(event)
@@ -16,6 +17,10 @@ export default eventHandler(async (event) => {
     const link: z.infer<typeof LinkSchema> | null = await KV.get(`link:${slug}`, { type: 'json', cacheTtl: linkCacheTtl })
     if (link) {
       event.context.link = link
+      // 检查 User Agent 是否包含 "Bot"
+      if (link.previewUrl && userAgent && userAgent.includes('Bot')) {
+        return sendRedirect(event, link.previewUrl, +useRuntimeConfig(event).redirectStatusCode)
+      }
       try {
         await useAccessLog(event)
       }
