@@ -44,6 +44,9 @@ const fieldConfig = {
     disabled: isEdit,
   },
   optional: {
+    previewUrl: {
+      disabled: false,
+    },
     comment: {
       component: 'textarea',
     },
@@ -65,6 +68,7 @@ const form = useForm({
     slug: link.value.slug,
     url: link.value.url,
     optional: {
+      previewUrl: link.value.previewUrl,
       comment: link.value.comment,
     },
   },
@@ -107,6 +111,7 @@ async function onSubmit(formData) {
     url: formData.url,
     slug: formData.slug,
     ...(formData.optional || []),
+    previewUrl: formData.optional?.previewUrl,
     expiration: formData.optional?.expiration ? date2unix(formData.optional?.expiration, 'end') : undefined,
   }
   const { link: newLink } = await useAPI(isEdit ? '/api/link/edit' : '/api/link/create', {
