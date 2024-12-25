@@ -16,7 +16,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     siteToken: 'SinkCool',
-    redirectStatusCode: '301',
+    redirectStatusCode: '302',
     linkCacheTtl: 60,
     redirectWithQuery: false,
     homeURL: '',
@@ -34,9 +34,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': {
-      prerender: true,
-    },
+    // '/': {
+    //   prerender: true,
+    // },
     '/dashboard/**': {
       ssr: false,
     },
@@ -51,6 +51,15 @@ export default defineNuxtConfig({
     experimental: {
       // Enable Server API documentation within NuxtHub
       openAPI: true,
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/_index/*',
+          ],
+        },
+      },
     },
   },
 
