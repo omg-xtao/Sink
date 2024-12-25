@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     siteToken: crypto.randomUUID(),
-    redirectStatusCode: '301',
+    redirectStatusCode: '302',
     linkCacheTtl: 60,
     redirectWithQuery: false,
     homeURL: '',
@@ -40,9 +40,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': {
-      prerender: true,
-    },
+    // '/': {
+    //   prerender: true,
+    // },
     '/dashboard/**': {
       prerender: true,
       ssr: false,
@@ -81,6 +81,15 @@ export default defineNuxtConfig({
         },
         swagger: {
           route: '/_docs/swagger',
+        },
+      },
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/_index/*',
+          ],
         },
       },
     },
