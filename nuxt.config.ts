@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     siteToken: process.env.NUXT_SITE_TOKEN || crypto.randomUUID(),
-    redirectStatusCode: '301',
+    redirectStatusCode: '302',
     linkCacheTtl: 60,
     redirectWithQuery: false,
     homeURL: '',
@@ -42,9 +42,9 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/': {
-      prerender: true,
-    },
+    // '/': {
+    //   prerender: true,
+    // },
     '/api/**': {
       cors: process.env.NUXT_API_CORS === 'true',
     },
@@ -88,6 +88,15 @@ export default defineNuxtConfig({
         },
         swagger: {
           route: '/_docs/swagger',
+        },
+      },
+    },
+    cloudflare: {
+      pages: {
+        routes: {
+          exclude: [
+            '/_index/*',
+          ],
         },
       },
     },
