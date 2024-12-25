@@ -34,8 +34,8 @@ useHead(() => ({
     },
     {
       rel: 'icon',
-      type: 'image/png',
-      href: '/icon-192.png',
+      type: 'image/vnd.microsoft.icon',
+      href: '/favicon.ico',
     },
     {
       rel: 'apple-touch-icon',

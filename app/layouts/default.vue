@@ -161,14 +161,6 @@ const { rawStats } = useGithubStats()
 
             <small class="block text-center text-sm text-muted-foreground">
               &copy; {{ new Date().getFullYear() }}
-              <a
-                href="https://html.zone"
-                target="_blank"
-                title="HTML.ZONE"
-                class="hover:text-primary"
-              >
-                {{ $t('layouts.footer.copyright') }}
-              </a>
             </small>
           </div>
 
